@@ -1,5 +1,7 @@
-import { createBrowserHistory as createHistory } from "history";
+import { createHashHistory as createHistory } from 'history';
 
 // a singleton history object
-const history = createHistory();
+const history = createHistory({
+  hashType: 'slash',
+});
 export default history;

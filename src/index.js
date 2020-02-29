@@ -1,10 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { Router } from "react-router-dom";
+import configureStore from "./store/configureStore";
+import { ConnectedRouter } from "connected-react-router";
+
 import "antd/dist/antd.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-
-import { Router } from "react-router-dom";
 
 import "./index.css";
 import App from "./containers/App";
@@ -12,10 +15,15 @@ import history from "./utils/history"
 import * as serviceWorker from "./serviceWorker";
 
 const mountNode = document.getElementById("root");
+const store = configureStore();
 ReactDOM.render(
-  <Router history={history}>
-    <App />
-  </Router>,
+  <Provider store={store}>
+  <ConnectedRouter history={history}>
+    <Router history={history}>
+      <App />
+    </Router>
+  </ConnectedRouter>
+  </Provider>,
   mountNode
 );
 
